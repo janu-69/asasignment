@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import axios from "axios"
 import validate from "validator" 
@@ -25,6 +25,14 @@ const Employeecreate = () => {
     const file = e.target.files[0];
     setimg(file);
   };
+
+  const token=localStorage.getItem("token")
+  useEffect(()=>{
+    if(!token){
+      alert("please relogin again..")
+      navigate("/login");
+    }
+  },[])
   
   const handlesubmit=()=>{
     if(!name || !email || !mobile || !designation || !gender || !course || !img){
@@ -50,6 +58,7 @@ const Employeecreate = () => {
             console.log(res)
             if(res.data.message==="employee created"){
                 alert('employee created');
+                window.location.reload();
             }
             if(res.data.message==="please fill all the credentials"){
                 alert("something went wrong");
@@ -62,7 +71,6 @@ const Employeecreate = () => {
               navigate("/login");
             }
         })
-      
   }
   else{
     alert('please enter valid email address...')

@@ -12,6 +12,15 @@ const Employeelist = () => {
     navigate("/createemployee");
   };
 
+  const token=localStorage.getItem("token")
+  useEffect(()=>{
+    if(!token){
+      alert("please relogin again..")
+      navigate("/login");
+    }
+  },[])
+  
+
   useEffect(() => {
     const headers = {
       token: localStorage.getItem("token"),

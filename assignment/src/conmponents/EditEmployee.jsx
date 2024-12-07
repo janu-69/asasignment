@@ -8,6 +8,15 @@ const EditEmployee = () => {
   const location = useLocation();
   const { employee } = location.state || {};
 
+  const token=localStorage.getItem("token")
+  useEffect(()=>{
+    if(!token){
+      alert("please relogin again..")
+      navigate("/login");
+    }
+  },[])
+  
+
   const [name, setName] = useState(employee?.name || '');
   const [email, setEmail] = useState(employee?.email || '');
   const [mobile, setMobile] = useState(employee?.mobile || '');
@@ -15,7 +24,7 @@ const EditEmployee = () => {
   const [gender, setGender] = useState(employee?.gender || '');
   const [course, setCourse] = useState(employee?.course || '');
   const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(employee?.image || '');  // To store the image preview URL
+  const [imagePreview, setImagePreview] = useState(employee?.image || '');  
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];

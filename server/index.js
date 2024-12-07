@@ -93,7 +93,7 @@ app.post("/api/login",async(req,res)=>{
                 const payload = {
                     email: verifyemail.email,
                   };
-                const token=jwt.sign(payload,process.env.API_SECRET,{expiresIn:'1m'})
+                const token=jwt.sign(payload,process.env.API_SECRET,{expiresIn:'1h'})
                 return res.send({message:"login success",token:token,name:verifyemail.name})
             }
             else{
